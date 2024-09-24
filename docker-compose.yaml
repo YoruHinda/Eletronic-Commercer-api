@@ -1,7 +1,22 @@
 services:
-  db:
+  mysql:
     image: mysql
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_DATABASE: commerce
+    healthcheck:
+      test: [ "CMD", "mysqladmin", "-uroot", "-proot",  "ping", "-h", "localhost" ]
+      interval: 30s
+      timeout: 20s
+      retries: 10
+  commerce:
+    build: .
+    restart: always
+    depends_on:
+      mysql:
+        condition: service_healthy
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/commerce?useSSL=false&&allowPublicKeyRetrieval=true&autoReconnect=true
+      SPRING_DATASOURCE_USERNAME: root
+      SPRING_DATASOURCE_PASSWORD: root
