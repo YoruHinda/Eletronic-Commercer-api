@@ -12,11 +12,11 @@ import lombok.Setter;
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long product_id;
-    @Column
+    private Long id;
+    @Column(name = "product_name")
     private String product_name;
-    @Column
+    @Column(name = "product_quantity")
     private int product_quantity;
-    @Column
+    @Column(name = "product_price")
     private float product_price;
 }
