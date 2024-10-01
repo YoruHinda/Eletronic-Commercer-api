@@ -1,4 +1,4 @@
-package com.github.yoruhinda.eletronicCommercer.models;
+package com.github.yoruhinda.eletronicCommercer.models.product;
 
 import jakarta.persistence.*;
 import lombok.Getter;

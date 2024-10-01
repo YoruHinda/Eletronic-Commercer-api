@@ -1,6 +1,6 @@
 package com.github.yoruhinda.eletronicCommercer.controller;
 
-import com.github.yoruhinda.eletronicCommercer.models.Product;
+import com.github.yoruhinda.eletronicCommercer.models.product.Product;
 import com.github.yoruhinda.eletronicCommercer.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
