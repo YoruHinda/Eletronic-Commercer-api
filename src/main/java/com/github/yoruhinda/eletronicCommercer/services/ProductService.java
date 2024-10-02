@@ -23,11 +23,13 @@ public class ProductService {
         return productDtos;
     }
 
-    public Product findById(Long id) {
+    public ProductDto findById(Long id) {
         if (productRepository.findById(id).isEmpty()) {
             throw new RuntimeException("Não foi possivel localizar o produto!");
         }
-        return productRepository.findById(id).get();
+        Product product = productRepository.findById(id).get();
+        ProductDto productDto = new ProductDto(product.getId(), product.getProduct_name(), product.getProduct_quantity(), product.getProduct_price());
+        return productDto;
     }
 
     public ProductDto saveProduct(ProductDto productDto){

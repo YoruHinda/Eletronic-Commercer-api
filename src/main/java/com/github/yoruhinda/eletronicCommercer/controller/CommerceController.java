@@ -20,7 +20,7 @@ public class CommerceController {
     }
 
     @DeleteMapping("/product/{id}")
-    public ResponseEntity deleteProductById(@PathVariable("id") Long id) {
+    public ResponseEntity<> deleteProductById(@PathVariable("id") Long id) {
         if (productService.findById(id) != null) {
             productService.deleteProduct(id);
             return new ResponseEntity<>(HttpStatus.OK);
