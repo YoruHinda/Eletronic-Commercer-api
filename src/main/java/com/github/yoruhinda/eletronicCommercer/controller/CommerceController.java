@@ -1,5 +1,6 @@
 package com.github.yoruhinda.eletronicCommercer.controller;
 
+import com.github.yoruhinda.eletronicCommercer.dto.product.ProductDto;
 import com.github.yoruhinda.eletronicCommercer.models.product.Product;
 import com.github.yoruhinda.eletronicCommercer.services.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,28 +14,23 @@ public class CommerceController {
     private ProductService productService;
 
     @GetMapping("/product/{id}")
-    public ResponseEntity<Product> findProductById(@PathVariable("id") Long id) {
-        if (productService.findById(id) != null)
-            return new ResponseEntity<>(productService.findById(id), HttpStatus.OK);
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    public ResponseEntity<ProductDto> findProductById(@PathVariable("id") Long id) {
+        return new ResponseEntity<>(productService.findById(id), HttpStatus.OK);
     }
 
     @DeleteMapping("/product/{id}")
-    public ResponseEntity<> deleteProductById(@PathVariable("id") Long id) {
-        if (productService.findById(id) != null) {
-            productService.deleteProduct(id);
-            return new ResponseEntity<>(HttpStatus.OK);
-        }
-        return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+    public ResponseEntity deleteProductById(@PathVariable("id") Long id) {
+        productService.deleteProduct(id);
+        return new ResponseEntity<>(HttpStatus.OK);
     }
 
     @PostMapping("/product")
-    public ResponseEntity<Product> postProduct(Product product) {
-        return new ResponseEntity<>(productService.saveProduct(product), HttpStatus.OK);
+    public ResponseEntity<ProductDto> postProduct(ProductDto productDto) {
+        return new ResponseEntity<>(productService.saveProduct(productDto), HttpStatus.OK);
     }
 
     @PutMapping("/product/{id}")
-    public ResponseEntity<Product> updateProduct(@PathVariable("id") Long id, Product product){
-        return new ResponseEntity<>(productService.updateProduct(id, product), HttpStatus.OK);
+    public ResponseEntity<ProductDto> updateProduct(@PathVariable("id") Long id, ProductDto productDto) {
+        return new ResponseEntity<>(productService.updateProduct(id, productDto), HttpStatus.OK);
     }
 }
