@@ -28,8 +28,7 @@ public class ProductService {
             throw new RuntimeException("Não foi possivel localizar o produto!");
         }
         Product product = productRepository.findById(id).get();
-        ProductDto productDto = new ProductDto(product.getId(), product.getProduct_name(), product.getProduct_quantity(), product.getProduct_price());
-        return productDto;
+        return new ProductDto(product.getId(), product.getProduct_name(), product.getProduct_quantity(), product.getProduct_price());
     }
 
     public ProductDto saveProduct(ProductDto productDto){
@@ -49,10 +48,8 @@ public class ProductService {
         if (productRepository.findById(id).isEmpty()) {
             throw new RuntimeException("Não foi possivel localizar o produto!");
         }
-        Product product = productRepository.findById(id).get();
-        product.setProduct_name(productDto.getProduct_name());
-        product.setProduct_price(productDto.getProduct_price());
-        product.setProduct_quantity(productDto.getProduct_quantity());
+        Product product = productDto.toModel();
+        product.setId(id);
         productRepository.save(product);
         return productDto;
     }
