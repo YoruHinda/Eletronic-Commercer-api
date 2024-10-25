@@ -20,7 +20,7 @@ public class Product {
     @Column(name = "product_description")
     private String product_description;
     @Column(name = "product_quantity")
-    private int product_quantity;
+    private Integer product_quantity;
     @Column(name = "product_price")
-    private float product_price;
+    private Float product_price;
 }
