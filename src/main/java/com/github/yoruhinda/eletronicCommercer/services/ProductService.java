@@ -17,7 +17,7 @@ public class ProductService {
     public List<ProductDto> getAllProducts() {
         List<ProductDto> productDtos = new ArrayList<>();
         for (Product product : productRepository.findAll()) {
-            ProductDto productDto = new ProductDto(product.getId(), product.getProduct_name(), product.getProduct_description(), product.getProduct_quantity(), product.getProduct_price());
+            ProductDto productDto = new ProductDto(product.getId(), product.getProduct_name(), product.getProduct_description(), product.getProduct_quantity(), product.getProduct_price(), product.getProduct_image_name());
             productDtos.add(productDto);
         }
         return productDtos;
@@ -28,10 +28,11 @@ public class ProductService {
             throw new RuntimeException("Não foi possivel localizar o produto!");
         }
         Product product = productRepository.findById(id).get();
-        return new ProductDto(product.getId(), product.getProduct_name(), product.getProduct_description(), product.getProduct_quantity(), product.getProduct_price());
+        return new ProductDto(product.getId(), product.getProduct_name(), product.getProduct_description(), product.getProduct_quantity(), product.getProduct_price(), product.getProduct_image_name());
     }
 
-    public ProductDto saveProduct(ProductDto productDto) {
+    public ProductDto saveProduct(ProductDto productDto, String product_image_name) {
+        productDto.setProduct_image_name(product_image_name);
         productRepository.save(productDto.toModel());
         return productDto;
     }

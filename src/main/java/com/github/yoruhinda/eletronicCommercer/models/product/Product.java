@@ -23,4 +23,6 @@ public class Product {
     private Integer product_quantity;
     @Column(name = "product_price")
     private Float product_price;
+    @Column(name = "product_image_name")
+    private String product_image_name;
 }
