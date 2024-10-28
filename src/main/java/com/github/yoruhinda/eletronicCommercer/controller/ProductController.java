@@ -6,12 +6,12 @@ import com.github.yoruhinda.eletronicCommercer.services.ProductService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -33,15 +33,11 @@ public class ProductController {
         return new ResponseEntity<>(productService.findById(id), HttpStatus.OK);
     }
 
-    @GetMapping("/product_image/{id}")
-    public ResponseEntity<List<byte[]>> findImageByProductId(@PathVariable("id") Long id){
+    @GetMapping("/product_image/{imageName}")
+    public ResponseEntity<byte[]> findImageByProductName(@PathVariable("imageName") String imageName) {
         try {
-            ProductDto byId = productService.findById(id);
-            String productImageName = byId.getProduct_image_name();
-            List<byte[]> imageBytesList = new ArrayList<>();
-            imageBytesList.add(imageService.getImage(imageDirectory, productImageName));
-            return new ResponseEntity<>(imageBytesList, HttpStatus.OK);
-        }catch (IOException e) {
+            return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(imageService.getImage(imageDirectory, imageName));
+        } catch (IOException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
     }
