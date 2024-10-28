@@ -33,10 +33,10 @@ public class ProductController {
         return new ResponseEntity<>(productService.findById(id), HttpStatus.OK);
     }
 
-    @GetMapping("/product_image/{imageName}")
+    @GetMapping(value = "/product_image/{imageName}", produces = MediaType.IMAGE_JPEG_VALUE)
     public ResponseEntity<byte[]> findImageByProductName(@PathVariable("imageName") String imageName) {
         try {
-            return ResponseEntity.ok().contentType(MediaType.IMAGE_JPEG).body(imageService.getImage(imageDirectory, imageName));
+            return ResponseEntity.ok().body(imageService.getImage(imageDirectory, imageName));
         } catch (IOException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
