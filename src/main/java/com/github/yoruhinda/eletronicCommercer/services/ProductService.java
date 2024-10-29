@@ -1,7 +1,7 @@
 package com.github.yoruhinda.eletronicCommercer.services;
 
-import com.github.yoruhinda.eletronicCommercer.dto.product.ProductDto;
-import com.github.yoruhinda.eletronicCommercer.models.product.Product;
+import com.github.yoruhinda.eletronicCommercer.domain.dto.product.ProductDto;
+import com.github.yoruhinda.eletronicCommercer.domain.entity.product.Product;
 import com.github.yoruhinda.eletronicCommercer.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

@@ -1,6 +1,6 @@
-package com.github.yoruhinda.eletronicCommercer.dto.product;
+package com.github.yoruhinda.eletronicCommercer.domain.dto.product;
 
-import com.github.yoruhinda.eletronicCommercer.models.product.Product;
+import com.github.yoruhinda.eletronicCommercer.domain.entity.product.Product;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;

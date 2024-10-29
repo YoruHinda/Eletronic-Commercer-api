@@ -1,6 +1,6 @@
 package com.github.yoruhinda.eletronicCommercer.controller;
 
-import com.github.yoruhinda.eletronicCommercer.dto.product.ProductDto;
+import com.github.yoruhinda.eletronicCommercer.domain.dto.product.ProductDto;
 import com.github.yoruhinda.eletronicCommercer.services.ImageService;
 import com.github.yoruhinda.eletronicCommercer.services.ProductService;
 import jakarta.validation.Valid;

@@ -1,6 +1,6 @@
 FROM gradle:8.10.1-jdk17-alpine AS BUILD
 WORKDIR /usr/app/
-COPY . .
+COPY .. .
 RUN gradle build --no-daemon
 
 FROM openjdk:17-alpine

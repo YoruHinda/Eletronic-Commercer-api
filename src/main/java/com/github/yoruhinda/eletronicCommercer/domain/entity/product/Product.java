@@ -1,4 +1,4 @@
-package com.github.yoruhinda.eletronicCommercer.models.product;
+package com.github.yoruhinda.eletronicCommercer.domain.entity.product;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
