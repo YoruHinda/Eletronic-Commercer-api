@@ -3,6 +3,7 @@ package com.github.yoruhinda.eletronicCommercer.controller;
 import com.github.yoruhinda.eletronicCommercer.domain.dto.user.LoginResponseDTO;
 import com.github.yoruhinda.eletronicCommercer.domain.dto.user.authenticationDTO;
 import com.github.yoruhinda.eletronicCommercer.domain.dto.user.registerDTO;
+import com.github.yoruhinda.eletronicCommercer.domain.entity.enumerated.UserRoleEnumerated;
 import com.github.yoruhinda.eletronicCommercer.domain.entity.user.User;
 import com.github.yoruhinda.eletronicCommercer.repository.UserRepository;
 import com.github.yoruhinda.eletronicCommercer.services.security.TokenService;
@@ -40,7 +41,8 @@ public class AuthenticationController {
     public ResponseEntity register(@RequestBody @Valid registerDTO register){
         if(userRepository.findByUsername(register.username()) != null) return ResponseEntity.ok().build();
         String encryptedPassword = new BCryptPasswordEncoder().encode(register.password());
-        User user = new User(register.username(), encryptedPassword, register.role());
+        User user = new User(register.username(), encryptedPassword);
+        user.setUserRole(UserRoleEnumerated.USER);
         this.userRepository.save(user);
         return ResponseEntity.ok().build();
     }

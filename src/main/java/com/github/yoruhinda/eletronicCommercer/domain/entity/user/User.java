@@ -29,10 +29,9 @@ public class User implements UserDetails {
     @Column(name = "userRole")
     private UserRoleEnumerated userRole;
 
-    public User(String username, String password, UserRoleEnumerated role){
+    public User(String username, String password){
         this.username = username;
         this.password = password;
-        this.userRole = role;
     }
 
     @Override

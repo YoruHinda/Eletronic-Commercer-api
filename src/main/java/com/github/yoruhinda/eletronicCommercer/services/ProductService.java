@@ -2,6 +2,7 @@ package com.github.yoruhinda.eletronicCommercer.services;
 
 import com.github.yoruhinda.eletronicCommercer.domain.dto.product.ProductDto;
 import com.github.yoruhinda.eletronicCommercer.domain.entity.product.Product;
+import com.github.yoruhinda.eletronicCommercer.exception.ProductNotFoundException;
 import com.github.yoruhinda.eletronicCommercer.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,7 +26,7 @@ public class ProductService {
 
     public ProductDto findById(Long id) {
         if (productRepository.findById(id).isEmpty()) {
-            throw new RuntimeException("Não foi possivel localizar o produto!");
+            throw new ProductNotFoundException();
         }
         Product product = productRepository.findById(id).get();
         return new ProductDto(product.getId(), product.getProduct_name(), product.getProduct_description(), product.getProduct_quantity(), product.getProduct_price(), product.getProduct_image_name());
@@ -39,7 +40,7 @@ public class ProductService {
 
     public void deleteProduct(Long id) {
         if (productRepository.findById(id).isEmpty()) {
-            throw new RuntimeException("Não foi possivel localizar o produto!");
+            throw new ProductNotFoundException();
         }
         Product product = productRepository.findById(id).get();
         productRepository.delete(product);
@@ -47,7 +48,7 @@ public class ProductService {
 
     public ProductDto updateProduct(Long id, ProductDto productDto) {
         if (productRepository.findById(id).isEmpty()) {
-            throw new RuntimeException("Não foi possivel localizar o produto!");
+            throw new ProductNotFoundException();
         }
         Product product = productDto.toModel();
         product.setId(id);

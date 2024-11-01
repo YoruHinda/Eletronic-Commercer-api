@@ -42,7 +42,7 @@ public class ProductController {
         }
     }
 
-    @PostMapping("/")
+    @PostMapping("/admin")
     public ResponseEntity<ProductDto> postProduct(@RequestPart("product") @Valid ProductDto productDto, @RequestPart("productImage") MultipartFile productImage) {
         try {
             String imageName = imageService.saveImageToStorage(imageDirectory, productImage);
@@ -52,12 +52,12 @@ public class ProductController {
         }
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("/admin/{id}")
     public ResponseEntity<ProductDto> updateProduct(@PathVariable("id") Long id, @RequestBody @Valid ProductDto productDto) {
         return new ResponseEntity<>(productService.updateProduct(id, productDto), HttpStatus.OK);
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("/admin/{id}")
     public ResponseEntity deleteProductById(@PathVariable("id") Long id) {
         productService.deleteProduct(id);
         return new ResponseEntity<>(HttpStatus.OK);
