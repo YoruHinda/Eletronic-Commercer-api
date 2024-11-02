@@ -1,4 +1,4 @@
-package com.github.yoruhinda.eletronicCommercer.util;
+package com.github.yoruhinda.eletronicCommercer.security;
 
 import com.github.yoruhinda.eletronicCommercer.repository.UserRepository;
 import com.github.yoruhinda.eletronicCommercer.services.security.TokenService;

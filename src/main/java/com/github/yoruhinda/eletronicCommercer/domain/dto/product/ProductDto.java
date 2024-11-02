@@ -3,10 +3,14 @@ package com.github.yoruhinda.eletronicCommercer.domain.dto.product;
 import com.github.yoruhinda.eletronicCommercer.domain.entity.product.Product;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
+@Builder
 public class ProductDto {
     private Long id;
     @NotBlank
