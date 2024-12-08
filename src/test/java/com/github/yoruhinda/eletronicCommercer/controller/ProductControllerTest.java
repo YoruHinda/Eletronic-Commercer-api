@@ -44,7 +44,7 @@ class ProductControllerTest {
     @Test
     @DisplayName("Return Product By ID When Successful")
     void returnProductById_WhenSuccessful(){
-        Long id = ProductCreator.createProduct().getId();
+        Long id = ProductCreator.createValidProduct().getId();
         ProductDto product = productController.findProductById(id).getBody();
         Assertions.assertThat(product).isNotNull();
         Assertions.assertThat(product.getId()).isEqualTo(id);
