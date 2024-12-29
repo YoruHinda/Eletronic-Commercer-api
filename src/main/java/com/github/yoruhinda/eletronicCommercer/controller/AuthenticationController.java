@@ -9,6 +9,7 @@ import com.github.yoruhinda.eletronicCommercer.repository.UserRepository;
 import com.github.yoruhinda.eletronicCommercer.services.security.TokenService;
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -33,13 +34,14 @@ public class AuthenticationController {
     public ResponseEntity login(@RequestBody @Valid authenticationDTO auth){
         UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken = new UsernamePasswordAuthenticationToken(auth.username(), auth.password());
         Authentication authenticate = authenticationManager.authenticate(usernamePasswordAuthenticationToken);
-        String token = tokenService.generateToken((User) authenticate.getPrincipal());
-        return ResponseEntity.ok(new LoginResponseDTO(token));
+        User authenticateUser = (User) authenticate.getPrincipal();
+        String token = tokenService.generateToken(authenticateUser);
+        return ResponseEntity.ok(new LoginResponseDTO(token, authenticateUser.getUsername(), authenticateUser.getUserRole()));
     }
 
     @PostMapping("/register")
     public ResponseEntity register(@RequestBody @Valid registerDTO register){
-        if(userRepository.findByUsername(register.username()) != null) return ResponseEntity.ok().build();
+        if(userRepository.findByUsername(register.username()) != null) return ResponseEntity.badRequest().build();
         String encryptedPassword = new BCryptPasswordEncoder().encode(register.password());
         User user = new User(register.username(), encryptedPassword);
         user.setUserRole(UserRoleEnumerated.USER);
