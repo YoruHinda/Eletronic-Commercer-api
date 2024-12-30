@@ -42,7 +42,7 @@ public class ProductController {
         }
     }
 
-    @PostMapping("/admin")
+    @RequestMapping(value = "/admin", method = RequestMethod.POST, consumes = "multipart/form-data")
     public ResponseEntity<ProductDto> postProduct(@RequestPart("product") @Valid ProductDto productDto, @RequestPart("productImage") MultipartFile productImage) {
         try {
             String imageName = imageService.saveImageToStorage(imageDirectory, productImage);
