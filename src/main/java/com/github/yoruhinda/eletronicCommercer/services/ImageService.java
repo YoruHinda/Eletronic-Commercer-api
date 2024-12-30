@@ -1,12 +1,16 @@
 package com.github.yoruhinda.eletronicCommercer.services;
 
+import com.github.yoruhinda.eletronicCommercer.domain.entity.product.ProductImage;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @Service
@@ -41,5 +45,18 @@ public class ImageService {
             return "Success";
         }
         return "Failed";
+    }
+
+    public List<ProductImage> getAllImagesProducts(String imageDirectory) throws IOException {
+        File folder = Path.of(imageDirectory).toFile();
+        File[] files = folder.listFiles();
+        List<ProductImage> productImageList = new ArrayList<>();
+        if(files != null){
+            for (File file : files) {
+                productImageList.add(new ProductImage(file.getName(), Files.readAllBytes(file.toPath())));
+            }
+            return productImageList;
+        }
+        return null;
     }
 }

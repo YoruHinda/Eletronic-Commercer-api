@@ -1,6 +1,7 @@
 package com.github.yoruhinda.eletronicCommercer.controller;
 
 import com.github.yoruhinda.eletronicCommercer.domain.dto.product.ProductDto;
+import com.github.yoruhinda.eletronicCommercer.domain.entity.product.ProductImage;
 import com.github.yoruhinda.eletronicCommercer.services.ImageService;
 import com.github.yoruhinda.eletronicCommercer.services.ProductService;
 import jakarta.validation.Valid;
@@ -37,6 +38,15 @@ public class ProductController {
     public ResponseEntity<byte[]> findImageByProductName(@PathVariable("imageName") String imageName) {
         try {
             return ResponseEntity.ok().body(imageService.getImage(imageDirectory, imageName));
+        } catch (IOException e) {
+            return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+        }
+    }
+
+    @GetMapping(value = "/product_image")
+    public ResponseEntity<List<ProductImage>> findAllImagesProducts() {
+        try {
+            return ResponseEntity.ok().body(imageService.getAllImagesProducts(imageDirectory));
         } catch (IOException e) {
             return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
         }
